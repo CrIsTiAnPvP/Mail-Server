@@ -16,7 +16,7 @@ RUN apt-get update && \
 ##########################################
 
 ############### CONFIGURE ###############
-COPY 10-mail.conf 10-mail.conf 10-auth.conf 10-master.conf 10-ssl.conf /etc/dovecot/conf.d/
+COPY conf.d/* /etc/dovecot/conf.d/
 RUN useradd -m -u 1001 -s /bin/bash pepe && \
     echo "pepe:password" | chpasswd && \
     useradd -m -u 1002 -s /bin/bash maria && \
