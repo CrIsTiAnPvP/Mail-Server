@@ -1,0 +1,56 @@
+services:
+  dns:
+    image: ghcr.io/cristianpvp/mail-dns:latest
+    container_name: dns-server
+    hostname: ns.isrv.test
+    networks:
+      isrv-net:
+        ipv4_address: 192.168.57.10
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    restart: always
+
+  # 2. Servidor Postfix (MTA)
+  postfix:
+    image: ghcr.io/cristianpvp/mail-postfix:latest
+    container_name: postfix-server
+    hostname: postfix.isrv.test
+    depends_on:
+      - dns
+    networks:
+      isrv-net:
+        ipv4_address: 192.168.57.11
+    ports:
+      - "25:25"
+    volumes:
+      - mail-data:/home 
+    restart: always
+
+  # 3. Servidor Dovecot (MDA/IMAP)
+  dovecot:
+    image: ghcr.io/cristianpvp/mail-dovecot:latest
+    container_name: dovecot-server
+    hostname: dovecot.isrv.test
+    depends_on:
+      - dns
+    networks:
+      isrv-net:
+        ipv4_address: 192.168.57.12
+    ports:
+      - "143:143"
+      - "110:110"
+    volumes:
+      - mail-data:/home
+    restart: always
+
+networks:
+  isrv-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.57.0/24
+
+volumes:
+  mail-data:
+    driver: local

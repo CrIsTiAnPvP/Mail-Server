@@ -1,0 +1,4 @@
+zone "isrv.test" {
+    type master;
+    file "/etc/bind/zones/db.isrv.test";
+};
