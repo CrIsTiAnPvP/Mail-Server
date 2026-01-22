@@ -126,12 +126,13 @@ This repository features an automated workflow located at `.github/workflows/pub
 ## 📂 Project Structure
 
 ```bash
-├── docker-compose.yml       # Orchestration of the 3 services
 ├── .github/
 │   └── workflows/           # CI/CD Pipeline configuration
 ├── Dockerfiles/
 │   ├── dns/                 # BIND9 Configuration
 │   │   ├── db.isrv.test     # Forward Lookup Zone
+│   │   ├── named.conf.local # Local configuration
+│   │   ├── named.conf.options # BIND9 options
 │   │   └── Dockerfile
 │   ├── postfix/             # MTA Configuration
 │   │   ├── main.cf
@@ -139,5 +140,7 @@ This repository features an automated workflow located at `.github/workflows/pub
 │   └── dovecot/             # IMAP/POP3 Configuration
 │       ├── conf.d/          # 10-mail, 10-auth, etc.
 │       └── Dockerfile
+├── docker-compose.yml       # Orchestration of the 3 services
+├── LICENSE                  # License file
 └── README.md
 ```
