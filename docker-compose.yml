@@ -1,3 +1,5 @@
+name: mail-server
+
 services:
   dns:
     image: ghcr.io/cristianpvp/mail-dns:latest
@@ -6,9 +8,6 @@ services:
     networks:
       isrv-net:
         ipv4_address: 192.168.57.10
-    ports:
-      - "53:53/udp"
-      - "53:53/tcp"
     restart: always
 
   # 2. Servidor Postfix (MTA)
@@ -21,8 +20,6 @@ services:
     networks:
       isrv-net:
         ipv4_address: 192.168.57.11
-    ports:
-      - "25:25"
     volumes:
       - mail-data:/home 
     restart: always
@@ -37,9 +34,6 @@ services:
     networks:
       isrv-net:
         ipv4_address: 192.168.57.12
-    ports:
-      - "143:143"
-      - "110:110"
     volumes:
       - mail-data:/home
     restart: always
