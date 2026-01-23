@@ -12,9 +12,7 @@ services:
 
   # 2. Servidor Postfix (MTA)
   postfix:
-    build:
-      context: ./Dockerfiles/postfix
-      dockerfile: Dockerfile
+    image: ghcr.io/cristianpvp/mail-postfix:latest
     container_name: postfix-server
     hostname: postfix.isrv.test
     depends_on:
@@ -28,9 +26,7 @@ services:
 
   # 3. Servidor Dovecot (MDA/IMAP)
   dovecot:
-    build:
-      context: ./Dockerfiles/dovecot
-      dockerfile: Dockerfile
+    image: ghcr.io/cristianpvp/mail-dovecot:latest
     container_name: dovecot-server
     hostname: dovecot.isrv.test
     depends_on:
