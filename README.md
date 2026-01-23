@@ -36,7 +36,6 @@ graph TD
 ### Prerequisites
 
 * Docker and Docker Compose installed.
-* Ports 53, 25, 143, and 110 must be free on your host machine (or port mapping must be adjusted).
 
 ### Installation
 

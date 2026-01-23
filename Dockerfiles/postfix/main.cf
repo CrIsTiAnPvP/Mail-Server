@@ -90,6 +90,7 @@ smtp_tls_security_level = may
 # SMTP Client TLS session cache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
-inet_interfaces = loopback-only
-default_transport = error
-relay_transport = error
+
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = inet:dovecot-server:6969
+smtpd_sasl_auth_enable = yes
